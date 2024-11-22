@@ -1,3 +1,4 @@
+<!-- feed.html -->
 {% extends 'social/layout.html' %}
 {% block content %}
 {% load humanize %}
@@ -5,15 +6,26 @@
 {% for post in posts %}
 <article>
     <div class="container-article">
-        <img src="{{ post.user.profile.image.url }}">
-        <div>
+        <div class="profile-image">
+            <!-- Imagen de perfil del usuario -->
+            <img src="{{ post.user.profile.image.url }}" alt="Imagen de perfil" class="profile-image">
+        </div>
+        <div class="post-content">
             <h2 class="username"><a href="{% url 'profile' post.user.username %}">@{{ post.user.username }}</a></h2>
             <i class="clock"></i>
-            <time data-time="#">{{ post.timestamp|naturaltime}}</time>
-            <div class="post">{{ post.content }}</div>
+            <time data-time="#">{{ post.timestamp|naturaltime }}</time>
+            <!-- Contenido del post -->
+            <div class="post-text">{{ post.content }}</div>
+
+            <!-- Imagen del post (si existe) -->
+            {% if post.image %}
+                <div class="post-image">
+                    <img src="{{ post.image.url }}" alt="Imagen del post">
+                </div>
+            {% endif %}
         </div>
     </div>
 </article>
-
 {% endfor %}
 {% endblock %}
+

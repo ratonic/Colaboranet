@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render,redirect
 from .models import *
 from .forms import PostForm, UserRegisterForm
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 def feed(request):
 	posts = Post.objects.all()
@@ -26,7 +27,7 @@ def register(request):
 def post(request):
 	current_user = get_object_or_404(User, pk=request.user.pk)
 	if request.method == 'POST':
-		form = PostForm(request.POST)
+		form = PostForm(request.POST, request.FILES)
 		if form.is_valid():
 			post = form.save(commit=False)
 			post.user = current_user

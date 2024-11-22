@@ -29,4 +29,4 @@ class Post(models.Model):
         ordering = ['-timestamp']
 
     def __str__(self):
-        return f'{self.user.username}: {self.content[:20]}...'  # Muestra solo los primeros 20 caracteres
+        return f'{self.user.username}: {self.content[:50]}...'  # Muestra solo los primeros 50 caracteres
